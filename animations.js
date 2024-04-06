@@ -16,7 +16,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 const contractAddressElement = document.getElementById('contract-address');
 
 // Polygon Sando Coin contract address
-const contractAddress = '0x58dabD289aF4530Cbce583fB7A2fD9d7dfeb5Fbc';
+const contractAddress = '0xf195C62301D648f2A0C5A4B78a05D4877335694B';
 
 // Set contract address text and link to Polygon Scan
 contractAddressElement.textContent = contractAddress;
