@@ -20,7 +20,7 @@ const contractAddress = '0xf195C62301D648f2A0C5A4B78a05D4877335694B';
 
 // Set contract address text and link to Polygon Scan
 contractAddressElement.textContent = contractAddress;
-contractAddressElement.innerHTML += ` <a href="https://polygonscan.com/address/${contractAddress}" target="_blank">(View on Polygon Scan)</a>`;
+contractAddressElement.innerHTML += ` <a href="https://polygonscan.com/token/${contractAddress}" target="_blank">(View on Polygon Scan)</a>`;
 
 // JavaScript to dynamically generate and animate the sandwiches
 document.addEventListener('DOMContentLoaded', function() {
