@@ -163,7 +163,7 @@ body {
     position: absolute;
     width: 32px;
     height: 32px;
-    background: url('assets/sandwich.png') no-repeat center center/contain;
+    background: url('./assets/sandwich.png') no-repeat center center/contain;
     animation: fall 5s linear infinite;
 }
 
