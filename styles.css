@@ -6,11 +6,12 @@
 }
 
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'ComicSans', cursive;
     background-color: #f9f9f9;
     color: #333;
     line-height: 1.6;
     overflow-x: hidden; /* Prevent horizontal scrollbar */
+    font-size: 18px;
 }
 
 .container {
@@ -25,7 +26,7 @@ header {
     padding: 20px 0;
     text-align: center;
     animation: fadeInDown 1s ease-out; /* Fade in animation */
-}
+} 
 
 header img {
     max-width: 200px;
@@ -33,9 +34,9 @@ header img {
 
 header h1 {
     margin-top: 10px;
-    font-size: 36px;
+    font-size: 54px;
     text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
-}
+} 
 
 nav ul {
     list-style-type: none;
@@ -50,6 +51,7 @@ nav ul li a {
     text-decoration: none;
     color: #fff;
     font-weight: bold;
+    font-size: 18px
 }
 
 section {
@@ -59,7 +61,7 @@ section {
 
 section h2 {
     margin-bottom: 20px;
-    font-size: 28px;
+    font-size: 42px;
     text-align: center;
 }
 
@@ -98,7 +100,7 @@ footer p {
 }
 
 .phase h3 {
-    font-size: 20px;
+    font-size: 28px;
     margin-bottom: 10px;
     color: #333;
 }
@@ -111,6 +113,7 @@ footer p {
 .phase ul li {
     margin-bottom: 10px;
     line-height: 1.5;
+    font-size: 18px;
 }
 
 /* Animations */
@@ -174,5 +177,41 @@ body {
     }
     100% {
         transform: translateY(100vh);
+    }
+}
+/* cool am i right*/
+@font-face {
+    font-family: 'ComicSans';
+    src: url('assets/COMICSANS.TTF') format('ttf'),
+         url('assets/COMICSANSBOLD.TTF') format('ttf');
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'ComicSans', cursive; /* Use 'ComicSans' font for all headings */
+    font-weight: bold; /* Make all headings bold */
+  }
+  .header-content {
+    display: flex;
+    align-items: center;
+}
+
+.header-content .text {
+    flex: 1;
+}
+
+.header-content .image {
+    margin-left: 20px;
+}
+
+/* Media query for smaller screens */
+@media (max-width: 768px) {
+    .header-content {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .header-content .image {
+        margin-top: 20px;
+        margin-left: 0;
     }
 }
