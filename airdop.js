@@ -8,7 +8,7 @@ window.addEventListener('load', async () => {
     }
     
     // Airdrop contract address
-    const airdropContractAddress = 'YOUR_AIRDROP_CONTRACT_ADDRESS'; // Replace with your contract address
+    const airdropContractAddress = '0x6175D95B225E3Aa3A5E7EC17E25Ac2C6B56241D9'; // Replace with your contract address
 
     // Airdrop contract ABI
     const airdropContractABI = [
