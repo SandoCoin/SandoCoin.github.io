@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         // Request tokens from the faucet contract
         requestTokensBtn.addEventListener('click', async () => {
           try {
-            const tx = await faucetContract.methods.distributeTokens([walletAddress]).send({ from: walletAddress });
+            const tx = await faucetContract.methods.requestTokens([walletAddress]).send({ from: walletAddress });
             console.log('Transaction hash:', tx.transactionHash);
             message.textContent = 'Tokens distributed successfully';
           } catch (error) {
