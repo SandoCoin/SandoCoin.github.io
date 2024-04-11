@@ -6,9 +6,10 @@ document.addEventListener('DOMContentLoaded', async function() {
     if (window.ethereum) {
       try {
         await window.ethereum.request({ method: 'eth_requestAccounts' });
-        console.log('Connected to wallet:', window.ethereum.selectedAddress);
+        const accounts = await window.ethereum.request({ method: 'eth_accounts' });
+        console.log('Connected to wallet:', accounts[0]);
         // Your Ethereum wallet address
-        const walletAddress = window.ethereum.selectedAddress;
+        const walletAddress = accounts[0];
         // Your Faucet contract address
         const faucetContractAddress = 'YOUR_FAUCET_CONTRACT_ADDRESS';
         // Your Faucet contract ABI
