@@ -1,3 +1,5 @@
+import Web3 from 'web3';
+
 document.addEventListener('DOMContentLoaded', async function() {
     const requestTokensBtn = document.getElementById('requestTokensBtn');
     const message = document.getElementById('message');
