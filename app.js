@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         // Your Ethereum wallet address
         const walletAddress = accounts[0];
         // Your Faucet contract address
-        const faucetContractAddress = 'YOUR_FAUCET_CONTRACT_ADDRESS';
+        const faucetContractAddress = '0x6E67AFe9FF451bca11D3dDBBCbe25d2747825B7a';
         // Your Faucet contract ABI
         const faucetContractABI = [
           // Your faucet contract ABI
