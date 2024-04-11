@@ -5,8 +5,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     // Ethereum wallet connection
     if (window.ethereum) {
       try {
-        await window.ethereum.request({ method: 'eth_requestAccounts' });
-        const accounts = await window.ethereum.request({ method: 'eth_accounts' });
+        const accounts = await window.ethereum.enable();
         console.log('Connected to wallet:', accounts[0]);
         // Your Ethereum wallet address
         const walletAddress = accounts[0];
