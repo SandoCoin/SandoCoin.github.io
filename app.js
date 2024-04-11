@@ -113,7 +113,7 @@ document.addEventListener('DOMContentLoaded', async function() {
                 }
             ]
         ];
-        const web3 = new web3(window.ethereum);
+        const web3 = new Web3(window.ethereum);
         const faucetContract = new web3.eth.Contract(faucetContractABI, faucetContractAddress);
   
         // Request tokens from the faucet contract
