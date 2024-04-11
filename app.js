@@ -113,13 +113,13 @@ document.addEventListener('DOMContentLoaded', async function() {
                 }
             ]
         ];
-        const web3 = new Web3(window.ethereum);
+        const web3 = new web3(window.ethereum);
         const faucetContract = new web3.eth.Contract(faucetContractABI, faucetContractAddress);
   
         // Request tokens from the faucet contract
         requestTokensBtn.addEventListener('click', async () => {
           try {
-            const tx = await faucetContract.requestTokens().send();
+            const tx = await faucetContract.methods.requestTokens().send({ from: walletAddress });
             console.log('Transaction hash:', tx.transactionHash);
             message.textContent = 'Tokens distributed successfully';
           } catch (error) {
