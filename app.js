@@ -13,109 +13,103 @@ document.addEventListener('DOMContentLoaded', async function() {
         const faucetContractAddress = '0x6E67AFe9FF451bca11D3dDBBCbe25d2747825B7a';
         // Your Faucet contract ABI
         const faucetContractABI = [
-            [
-                [
-                    [
-                        {
-                            "anonymous": false,
-                            "inputs": [
-                                {
-                                    "indexed": true,
-                                    "internalType": "address",
-                                    "name": "recipient",
-                                    "type": "address"
-                                },
-                                {
-                                    "indexed": false,
-                                    "internalType": "uint256",
-                                    "name": "amount",
-                                    "type": "uint256"
-                                }
-                            ],
-                            "name": "TokensDripped",
-                            "type": "event"
-                        },
-                        {
-                            "inputs": [],
-                            "name": "DRIP_MAX_AMOUNT",
-                            "outputs": [
-                                {
-                                    "internalType": "uint256",
-                                    "name": "",
-                                    "type": "uint256"
-                                }
-                            ],
-                            "stateMutability": "view",
-                            "type": "function"
-                        },
-                        {
-                            "inputs": [],
-                            "name": "DRIP_MIN_AMOUNT",
-                            "outputs": [
-                                {
-                                    "internalType": "uint256",
-                                    "name": "",
-                                    "type": "uint256"
-                                }
-                            ],
-                            "stateMutability": "view",
-                            "type": "function"
-                        },
-                        {
-                            "inputs": [],
-                            "name": "TOKEN_ADDRESS",
-                            "outputs": [
-                                {
-                                    "internalType": "address",
-                                    "name": "",
-                                    "type": "address"
-                                }
-                            ],
-                            "stateMutability": "view",
-                            "type": "function"
-                        },
-                        {
-                            "inputs": [],
-                            "name": "faucetBalance",
-                            "outputs": [
-                                {
-                                    "internalType": "uint256",
-                                    "name": "",
-                                    "type": "uint256"
-                                }
-                            ],
-                            "stateMutability": "view",
-                            "type": "function"
-                        },
-                        {
-                            "inputs": [
-                                {
-                                    "internalType": "address",
-                                    "name": "",
-                                    "type": "address"
-                                }
-                            ],
-                            "name": "lastDripTime",
-                            "outputs": [
-                                {
-                                    "internalType": "uint256",
-                                    "name": "",
-                                    "type": "uint256"
-                                }
-                            ],
-                            "stateMutability": "view",
-                            "type": "function"
-                        },
-                        {
-                            "inputs": [],
-                            "name": "requestTokens",
-                            "outputs": [],
-                            "stateMutability": "nonpayable",
-                            "type": "function"
-                        }
-                    ]
-                ]
-            ]
+            {
+                "anonymous": false,
+                "inputs": [
+                    {
+                        "indexed": true,
+                        "internalType": "address",
+                        "name": "recipient",
+                        "type": "address"
+                    },
+                    {
+                        "indexed": false,
+                        "internalType": "uint256",
+                        "name": "amount",
+                        "type": "uint256"
+                    }
+                ],
+                "name": "TokensDripped",
+                "type": "event"
+            },
+            {
+                "inputs": [],
+                "name": "DRIP_MAX_AMOUNT",
+                "outputs": [
+                    {
+                        "internalType": "uint256",
+                        "name": "",
+                        "type": "uint256"
+                    }
+                ],
+                "stateMutability": "view",
+                "type": "function"
+            },
+            {
+                "inputs": [],
+                "name": "DRIP_MIN_AMOUNT",
+                "outputs": [
+                    {
+                        "internalType": "uint256",
+                        "name": "",
+                        "type": "uint256"
+                    }
+                ],
+                "stateMutability": "view",
+                "type": "function"
+            },
+            {
+                "inputs": [],
+                "name": "TOKEN_ADDRESS",
+                "outputs": [
+                    {
+                        "internalType": "address",
+                        "name": "",
+                        "type": "address"
+                    }
+                ],
+                "stateMutability": "view",
+                "type": "function"
+            },
+            {
+                "inputs": [],
+                "name": "faucetBalance",
+                "outputs": [
+                    {
+                        "internalType": "uint256",
+                        "name": "",
+                        "type": "uint256"
+                    }
+                ],
+                "stateMutability": "view",
+                "type": "function"
+            },
+            {
+                "inputs": [
+                    {
+                        "internalType": "address",
+                        "name": "",
+                        "type": "address"
+                    }
+                ],
+                "name": "lastDripTime",
+                "outputs": [
+                    {
+                        "internalType": "uint256",
+                        "name": "",
+                        "type": "uint256"
+                    }
+                ],
+                "stateMutability": "view",
+                "type": "function"
+            },
+            {
+                "inputs": [],
+                "name": "requestTokens",
+                "outputs": [],
+                "stateMutability": "nonpayable",
+                "type": "function"
+            }
         ];
         const web3 = new Web3(window.ethereum);
         const faucetContract = new web3.eth.Contract(faucetContractABI, faucetContractAddress);
@@ -123,7 +117,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         // Request tokens from the faucet contract
         requestTokensBtn.addEventListener('click', async () => {
           try {
-            const tx = await faucetContract.methods.requestTokens([]).send({ from: walletAddress });
+            const tx = await faucetContract.methods.requestTokens.send({ from: walletAddress });
             console.log('Transaction hash:', tx.transactionHash);
             message.textContent = 'Tokens distributed successfully';
           } catch (error) {
