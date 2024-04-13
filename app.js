@@ -1,7 +1,8 @@
 document.addEventListener('DOMContentLoaded', async function() {
     const requestTokensBtn = document.getElementById('requestTokensBtn');
     const message = document.getElementById('message');
-    const balance = document.getElementById('balance');
+    const cooldownTime = document.getElementById('cooldownTime');
+    const faucetBalance = document.getElementById('faucetBalance');
   
     // Ethereum wallet connection
     if (window.ethereum) {
@@ -124,10 +125,14 @@ document.addEventListener('DOMContentLoaded', async function() {
           }
         });
   
-        // Display faucet balance
-        const balanceResponse = await faucetContract.methods.faucetBalance().call();
-        balance.textContent = `Faucet Balance: ${web3.utils.fromWei(balanceResponse)} tokens`;
-  
+        // Update faucet balance and cooldown time
+        setInterval(async () => {
+            const balanceResponse = await faucetContract.methods.faucetBalance().call();
+            const remainingTime = await getRemainingCooldownTime();
+            faucetBalance.textContent = `Faucet Balance: ${web3.utils.fromWei(balanceResponse)} tokens`;
+            cooldownTime.textContent = `Cooldown Time: ${formatTime(remainingTime)}`;
+        }, 1000);
+
       } catch (error) {
         console.error('Error connecting to wallet:', error);
         message.textContent = 'Error connecting to wallet';
@@ -136,5 +141,22 @@ document.addEventListener('DOMContentLoaded', async function() {
       console.error('MetaMask is not installed');
       message.textContent = 'Please install MetaMask to interact with this faucet';
     }
-  });
+});
+
+async function getRemainingCooldownTime() {
+  const cooldownTimeInSeconds = 10 * 3600; // 10 hours cooldown time
+  const lastDripTimeResponse = await faucetContract.methods.lastDripTime(walletAddress).call();
+  const lastDripTime = Number(lastDripTimeResponse);
+  const currentTime = Math.floor(Date.now() / 1000);
+  const elapsedTime = currentTime - lastDripTime;
+  const remainingTime = cooldownTimeInSeconds - elapsedTime;
+  return remainingTime;
+}
+
+function formatTime(seconds) {
+  const hours = Math.floor(seconds / 3600);
+  const minutes = Math.floor((seconds % 3600) / 60);
+  const remainingSeconds = seconds % 60;
+  return `${hours}h ${minutes}m ${remainingSeconds}s`;
+}
   
