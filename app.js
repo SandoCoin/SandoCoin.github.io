@@ -1,115 +1,113 @@
 document.addEventListener('DOMContentLoaded', async function() {
     const requestTokensBtn = document.getElementById('requestTokensBtn');
     const message = document.getElementById('message');
+    const balance = document.getElementById('balance');
   
     // Ethereum wallet connection
     if (window.ethereum) {
       try {
         const accounts = await window.ethereum.enable();
         console.log('Connected to wallet:', accounts[0]);
-        // Your Ethereum wallet address
         const walletAddress = accounts[0];
-        // Your Faucet contract address
-        const faucetContractAddress = '0xB0acc80718f83DbE3868C2d8C6a850c01be3912a';
-        // Your Faucet contract ABI
+        const faucetContractAddress = '0xf2Dab467f9Bdfa6dBFD3B3a894f878261E7ed1de';
         const faucetContractABI = [
-            {
-                "anonymous": false,
-                "inputs": [
-                    {
-                        "indexed": true,
-                        "internalType": "address",
-                        "name": "recipient",
-                        "type": "address"
-                    },
-                    {
-                        "indexed": false,
-                        "internalType": "uint256",
-                        "name": "amount",
-                        "type": "uint256"
-                    }
-                ],
-                "name": "TokensDripped",
-                "type": "event"
-            },
-            {
-                "inputs": [],
-                "name": "DRIP_MAX_AMOUNT",
-                "outputs": [
-                    {
-                        "internalType": "uint256",
-                        "name": "",
-                        "type": "uint256"
-                    }
-                ],
-                "stateMutability": "view",
-                "type": "function"
-            },
-            {
-                "inputs": [],
-                "name": "DRIP_MIN_AMOUNT",
-                "outputs": [
-                    {
-                        "internalType": "uint256",
-                        "name": "",
-                        "type": "uint256"
-                    }
-                ],
-                "stateMutability": "view",
-                "type": "function"
-            },
-            {
-                "inputs": [],
-                "name": "TOKEN_ADDRESS",
-                "outputs": [
-                    {
-                        "internalType": "address",
-                        "name": "",
-                        "type": "address"
-                    }
-                ],
-                "stateMutability": "view",
-                "type": "function"
-            },
-            {
-                "inputs": [],
-                "name": "faucetBalance",
-                "outputs": [
-                    {
-                        "internalType": "uint256",
-                        "name": "",
-                        "type": "uint256"
-                    }
-                ],
-                "stateMutability": "view",
-                "type": "function"
-            },
-            {
-                "inputs": [
-                    {
-                        "internalType": "address",
-                        "name": "",
-                        "type": "address"
-                    }
-                ],
-                "name": "lastDripTime",
-                "outputs": [
-                    {
-                        "internalType": "uint256",
-                        "name": "",
-                        "type": "uint256"
-                    }
-                ],
-                "stateMutability": "view",
-                "type": "function"
-            },
-            {
-                "inputs": [],
-                "name": "requestTokens",
-                "outputs": [],
-                "stateMutability": "nonpayable",
-                "type": "function"
-            }
+          {
+            "anonymous": false,
+            "inputs": [
+              {
+                "indexed": true,
+                "internalType": "address",
+                "name": "recipient",
+                "type": "address"
+              },
+              {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "amount",
+                "type": "uint256"
+              }
+            ],
+            "name": "TokensDripped",
+            "type": "event"
+          },
+          {
+            "inputs": [],
+            "name": "DRIP_MAX_AMOUNT",
+            "outputs": [
+              {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+              }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+          },
+          {
+            "inputs": [],
+            "name": "DRIP_MIN_AMOUNT",
+            "outputs": [
+              {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+              }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+          },
+          {
+            "inputs": [],
+            "name": "TOKEN_ADDRESS",
+            "outputs": [
+              {
+                "internalType": "address",
+                "name": "",
+                "type": "address"
+              }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+          },
+          {
+            "inputs": [],
+            "name": "faucetBalance",
+            "outputs": [
+              {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+              }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+          },
+          {
+            "inputs": [
+              {
+                "internalType": "address",
+                "name": "",
+                "type": "address"
+              }
+            ],
+            "name": "lastDripTime",
+            "outputs": [
+              {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+              }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+          },
+          {
+            "inputs": [],
+            "name": "requestTokens",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+          }
         ];
         const web3 = new Web3(window.ethereum);
         const faucetContract = new web3.eth.Contract(faucetContractABI, faucetContractAddress);
@@ -125,6 +123,11 @@ document.addEventListener('DOMContentLoaded', async function() {
             message.textContent = 'Error requesting tokens';
           }
         });
+  
+        // Display faucet balance
+        const balanceResponse = await faucetContract.methods.faucetBalance().call();
+        balance.textContent = `Faucet Balance: ${web3.utils.fromWei(balanceResponse)} tokens`;
+  
       } catch (error) {
         console.error('Error connecting to wallet:', error);
         message.textContent = 'Error connecting to wallet';
