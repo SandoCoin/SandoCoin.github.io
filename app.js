@@ -118,10 +118,19 @@ document.addEventListener('DOMContentLoaded', async function() {
             const lastDripTimeResponse = await faucetContract.methods.lastDripTime(walletAddress).call();
             const lastDripTime = Number(lastDripTimeResponse);
             const currentTime = Math.floor(Date.now() / 1000);
+            
+            // Check if lastDripTime is uninitialized or zero
+            if (lastDripTime === 0) {
+              return cooldownTimeInSeconds; // Return full cooldown time
+            }
+            
             const elapsedTime = currentTime - lastDripTime;
             const remainingTime = cooldownTimeInSeconds - elapsedTime;
-            return remainingTime;
-        }
+          
+            // Ensure remaining time is non-negative
+            return Math.max(remainingTime, 0);
+          }
+          
             
         function formatTime(seconds) {
             const hours = Math.floor(seconds / 3600);
