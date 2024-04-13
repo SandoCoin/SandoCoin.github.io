@@ -141,22 +141,22 @@ document.addEventListener('DOMContentLoaded', async function() {
       console.error('MetaMask is not installed');
       message.textContent = 'Please install MetaMask to interact with this faucet';
     }
-});
+ });
 
-async function getRemainingCooldownTime() {
-  const cooldownTimeInSeconds = 10 * 3600; // 10 hours cooldown time
-  const lastDripTimeResponse = await faucetContract.methods.lastDripTime(walletAddress).call();
-  const lastDripTime = Number(lastDripTimeResponse);
-  const currentTime = Math.floor(Date.now() / 1000);
-  const elapsedTime = currentTime - lastDripTime;
-  const remainingTime = cooldownTimeInSeconds - elapsedTime;
-  return remainingTime;
-}
+    async function getRemainingCooldownTime(faucetContract, walletAddress) {
+        const cooldownTimeInSeconds = 10 * 3600; // 10 hours cooldown time
+        const lastDripTimeResponse = await faucetContract.methods.lastDripTime(walletAddress).call();
+        const lastDripTime = Number(lastDripTimeResponse);
+        const currentTime = Math.floor(Date.now() / 1000);
+        const elapsedTime = currentTime - lastDripTime;
+        const remainingTime = cooldownTimeInSeconds - elapsedTime;
+        return remainingTime;
+    }
 
-function formatTime(seconds) {
-  const hours = Math.floor(seconds / 3600);
-  const minutes = Math.floor((seconds % 3600) / 60);
-  const remainingSeconds = seconds % 60;
-  return `${hours}h ${minutes}m ${remainingSeconds}s`;
-}
+    function formatTime(seconds) {
+    const hours = Math.floor(seconds / 3600);
+    const minutes = Math.floor((seconds % 3600) / 60);
+    const remainingSeconds = seconds % 60;
+    return `${hours}h ${minutes}m ${remainingSeconds}s`;
+    }
   
