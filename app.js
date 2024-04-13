@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     const message = document.getElementById('message');
     const cooldownTime = document.getElementById('cooldownTime');
     const faucetBalance = document.getElementById('faucetBalance');
-  
+    
     // Ethereum wallet connection
     if (window.ethereum) {
       try {
@@ -112,7 +112,24 @@ document.addEventListener('DOMContentLoaded', async function() {
         ];
         const web3 = new Web3(window.ethereum);
         const faucetContract = new web3.eth.Contract(faucetContractABI, faucetContractAddress);
-  
+
+        async function getRemainingCooldownTime() {
+            const cooldownTimeInSeconds = 10 * 3600; // 10 hours cooldown time
+            const lastDripTimeResponse = await faucetContract.methods.lastDripTime(walletAddress).call();
+            const lastDripTime = Number(lastDripTimeResponse);
+            const currentTime = Math.floor(Date.now() / 1000);
+            const elapsedTime = currentTime - lastDripTime;
+            const remainingTime = cooldownTimeInSeconds - elapsedTime;
+            return remainingTime;
+        }
+            
+        function formatTime(seconds) {
+            const hours = Math.floor(seconds / 3600);
+            const minutes = Math.floor((seconds % 3600) / 60);
+            const remainingSeconds = seconds % 60;
+            return `${hours}h ${minutes}m ${remainingSeconds}s`;
+        }
+
         // Request tokens from the faucet contract
         requestTokensBtn.addEventListener('click', async () => {
           try {
@@ -124,7 +141,7 @@ document.addEventListener('DOMContentLoaded', async function() {
             message.textContent = 'Error requesting tokens';
           }
         });
-  
+
         // Update faucet balance and cooldown time
         setInterval(async () => {
             const balanceResponse = await faucetContract.methods.faucetBalance().call();
@@ -142,21 +159,3 @@ document.addEventListener('DOMContentLoaded', async function() {
       message.textContent = 'Please install MetaMask to interact with this faucet';
     }
  });
-
-    async function getRemainingCooldownTime(faucetContract, walletAddress) {
-        const cooldownTimeInSeconds = 10 * 3600; // 10 hours cooldown time
-        const lastDripTimeResponse = await faucetContract.methods.lastDripTime(walletAddress).call();
-        const lastDripTime = Number(lastDripTimeResponse);
-        const currentTime = Math.floor(Date.now() / 1000);
-        const elapsedTime = currentTime - lastDripTime;
-        const remainingTime = cooldownTimeInSeconds - elapsedTime;
-        return remainingTime;
-    }
-
-    function formatTime(seconds) {
-    const hours = Math.floor(seconds / 3600);
-    const minutes = Math.floor((seconds % 3600) / 60);
-    const remainingSeconds = seconds % 60;
-    return `${hours}h ${minutes}m ${remainingSeconds}s`;
-    }
-  
