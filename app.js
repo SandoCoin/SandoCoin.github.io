@@ -155,8 +155,8 @@ document.addEventListener('DOMContentLoaded', async function() {
         setInterval(async () => {
             const balanceResponse = await faucetContract.methods.faucetBalance().call();
             const remainingTime = await getRemainingCooldownTime();
-            faucetBalance.textContent = `Faucet Balance: ${web3.utils.fromWei(balanceResponse)} tokens`;
-            cooldownTime.textContent = `Cooldown Time: ${formatTime(remainingTime)}`;
+            faucetBalance.textContent = ` ${web3.utils.fromWei(balanceResponse)} tokens`;
+            cooldownTime.textContent = ` ${formatTime(remainingTime)}`;
         }, 1000);
 
       } catch (error) {
