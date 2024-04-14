@@ -6,7 +6,8 @@
 }
 
 body {
-    font-family: 'ComicSans', cursive;
+    font-family: 'Comic Neue', cursive;
+    font-weight: 700;
     background-color: #f9f9f9;
     color: #333;
     line-height: 1.6;
@@ -179,16 +180,10 @@ body {
         transform: translateY(100vh);
     }
 }
-/* cool am i right*/
-@font-face {
-    font-family: 'ComicSans';
-    src: url('assets/COMICSANS.TTF') format('ttf'),
-         url('assets/COMICSANSBOLD.TTF') format('ttf');
-}
 
 h1, h2, h3, h4, h5, h6 {
-    font-family: 'ComicSans', cursive; /* Use 'ComicSans' font for all headings */
-    font-weight: bold; /* Make all headings bold */
+    font-family: 'Comic Neue', cursive; /* Use 'Comic Neue' font for all headings (i wanted to use comic sans but idk its microsoft*/
+    font-weight: 800; /* Make all headings bold */
   }
   .header-content {
     display: flex;
@@ -242,5 +237,41 @@ button:hover {
   
 .hidden {
     display: none;
+}
+
+.comic-neue-light {
+    font-family: "Comic Neue", cursive;
+    font-weight: 300;
+    font-style: normal;
+}
+  
+.comic-neue-regular {
+    font-family: "Comic Neue", cursive;
+    font-weight: 400;
+    font-style: normal;
+}
+  
+.comic-neue-bold {
+    font-family: "Comic Neue", cursive;
+    font-weight: 700;
+    font-style: normal;
+}
+  
+.comic-neue-light-italic {
+    font-family: "Comic Neue", cursive;
+    font-weight: 300;
+    font-style: italic;
+}
+  
+.comic-neue-regular-italic {
+    font-family: "Comic Neue", cursive;
+    font-weight: 400;
+    font-style: italic;
+}
+  
+.comic-neue-bold-italic {
+    font-family: "Comic Neue", cursive;
+    font-weight: 700;
+    font-style: italic;
 }
   
