@@ -3,23 +3,27 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Faucet</title>
+  <title>🚰 Faucet 🤪</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <header>
-    <h1>Faucet</h1>
+    <h1>🚰 Welcome to the Faucet! 🥪</h1>
   </header>
   <main>
     <section class="faucet">
-      <button id="requestTokensBtn">Request Tokens</button>
+      <button id="requestTokensBtn">💧 Click to Get Tokens! 🥪</button>
       <p id="message"></p>
-      <p id="cooldownTime"></p>
-      <p id="faucetBalance"></p>
-    </section>    
+      <div id="cooldownTimer" class="hidden">
+        <p>⏳ Next request available in: <span id="cooldownTime"></span></p>
+      </div>
+      <div id="balance" class="hidden">
+        <p>🥪 Faucet Balance: <span id="balanceAmount"></span> tokens</p>
+      </div>
+    </section>
   </main>
   <footer>
-    <p>&copy; 2024 Your Faucet</p>
+    <p> © 2024 Sando Coin - Serving up tasty crypto sandwiches since forever! 🥪🚀</p>
   </footer>
   <script src="https://cdn.jsdelivr.net/npm/web3@1.10.0/dist/web3.min.js"></script>
   <script src="app.js"></script>
