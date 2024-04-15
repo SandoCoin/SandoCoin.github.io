@@ -1,2 +1,2 @@
-# SandwichPlays.github.io
+# Sando Coin github
 yay
