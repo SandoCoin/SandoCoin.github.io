@@ -1,2 +1,2 @@
 # Sando Coin github
-yay
+hosting this for my friend
